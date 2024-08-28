@@ -2,14 +2,15 @@
 
 
 
-Install vitepress
+### 1. Install VitePress
 
 ```terminal
 $ npm add -D vitepress
 ```
 
+### 2. Start website
 ```terminal
 $ make dev
 ```
 
-visit http://localhost:5173/
+Visit http://localhost:5173/
