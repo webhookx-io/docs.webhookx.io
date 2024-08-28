@@ -11,6 +11,7 @@ hero:
       text: Quickstart
       link: /introduction/overview
 
+
 #features:
 #  - title: Feature A
 #    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
