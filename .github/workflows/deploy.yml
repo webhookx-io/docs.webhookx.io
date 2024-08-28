@@ -1,9 +1,6 @@
 name: Deploy
 
-on:
-  push:
-    branches:
-      - main
+on: [ push ]
 
 jobs:
   deploy:
@@ -20,11 +17,22 @@ jobs:
 
       - run: npm run docs:build
 
-      - name: deploy to netlify
+      - name: deploy to netlify (prod)
+        if: ${{ github.ref_name == 'main' }}
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=.vitepress/dist --prod
+          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+
+      - name: deploy to netlify (dev)
+        if: ${{ github.ref_name != 'main' }}
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        with:
+          args: deploy --dir=.vitepress/dist
           secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
