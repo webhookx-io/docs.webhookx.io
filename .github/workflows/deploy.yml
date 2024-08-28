@@ -1,6 +1,17 @@
 name: Deploy
 
-on: [ push ]
+on:
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+
+permissions:
+  pull-requests: write
 
 jobs:
   deploy:
@@ -25,14 +36,23 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
           args: deploy --dir=.vitepress/dist --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
 
       - name: deploy to netlify (dev)
         if: ${{ github.ref_name != 'main' }}
+        id: deploy-neflify-dev
         uses: netlify/actions/cli@master
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         with:
-          args: deploy --dir=.vitepress/dist
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+          args: deploy --dir=.vitepress/dist --deployId=preview-${{ github.event.number }}
+
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'This pull request is being automatically deployed to Netlify.\n\n🔍 Inspect: ${{ steps.deploy-neflify-dev.outputs.NETLIFY_LOGS_URL }}\n✅ Preview: ${{ steps.deploy-neflify-dev.outputs.NETLIFY_URL }}'
+            })
