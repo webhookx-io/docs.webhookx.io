@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type DefaultTheme } from 'vitepress'
 
 export default defineConfig({
   title: "WebhookX",
@@ -45,7 +45,8 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
       text: "Introduction",
       collapsed: false,
       items: [
-        { text: 'Overview', link: 'introduction/overview' }
+        { text: 'Overview', link: 'introduction/overview' },
+        { text: 'CLI', link: 'docs/cli' },
       ]
     },
     {
