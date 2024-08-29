@@ -12,49 +12,23 @@ export default defineConfig({
     },
 
     nav: [
-      { text: 'Docs', link: '/docs-index' },
+      {
+        text: 'Docs',
+        link: '/docs',
+        activeMatch: '/'
+      },
+      {
+        text: 'Blog',
+        link: '/blog/index',
+        activeMatch: '/blog'
+      },
     ],
 
-    sidebar: [
-      {
-        text: "Introduction",
-        collapsed: false,
-        items: [
-          { text: 'Overview', link: 'introduction/overview' }
-        ]
-      },
-      {
-        text: "Install WebhookX",
-        collapsed: true,
-        items: [
-          { text: 'Docker', link: 'install/docker' },
-          // { text: 'Kubernetes', link: 'install/kubernetes' },
-          // { text: 'Linux', link: 'install/linux' },
-        ]
-      },
-      {
-        text: "Deployment",
-        collapsed: false,
-        items: [
-          { text: 'Configuration', link: 'configuration' },
-        ]
-      },
-      {
-        text: "Admin API",
-        collapsed: false,
-        items: [
-          { text: 'Overview', link: 'admin/overview' },
-        ]
-      },
-      {
-        text: "Others",
-        collapsed: false,
-        items: [
-          // { text: 'Glossary', link: 'glossary' },
-          { text: 'Release Notes', link: 'https://github.com/webhookx-io/webhookx/releases/' }
-        ]
-      },
-    ],
+    sidebar: {
+      '/': { base: '/', items: sidebarDocs() },
+      '/blog/': { base: '/blog/', items: sidebarBlog() }
+    },
+
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/webhookx-io/webhookx' },
@@ -63,3 +37,62 @@ export default defineConfig({
     ]
   }
 })
+
+
+function sidebarDocs(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: "Introduction",
+      collapsed: false,
+      items: [
+        { text: 'Overview', link: 'introduction/overview' }
+      ]
+    },
+    {
+      text: "Install WebhookX",
+      collapsed: true,
+      items: [
+        { text: 'Docker', link: 'install/docker' },
+        // { text: 'Kubernetes', link: 'install/kubernetes' },
+        // { text: 'Linux', link: 'install/linux' },
+      ]
+    },
+    {
+      text: "Deployment",
+      collapsed: false,
+      items: [
+        { text: 'Configuration', link: 'configuration' },
+      ]
+    },
+    {
+      text: "Admin API",
+      collapsed: false,
+      items: [
+        { text: 'Overview', link: 'admin/overview' },
+      ]
+    },
+    {
+      text: "Others",
+      collapsed: false,
+      items: [
+        { text: 'Release Notes', link: 'https://github.com/webhookx-io/webhookx/releases/' }
+      ]
+    },
+  ]
+}
+
+
+function sidebarBlog(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: "Category",
+      link: 'index',
+      items: [
+        { text: 'Releases', link: 'releases/index' },
+        { text: 'News', link: 'news/index' },
+        { text: 'Engineering', link: 'engineering/index' },
+      ]
+    },
+  ]
+}
+
