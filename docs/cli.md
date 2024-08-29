@@ -37,6 +37,8 @@ All commands take a set of special, optional flags as arguments:
 ### webhookx migrations
 
 ```sh
+$ webhookx migrations --help
+
 Usage:
   webhookx migrations [command]
 
@@ -57,6 +59,8 @@ Use "webhookx migrations [command] --help" for more information about a command.
 ### webhookx start
 
 ```sh
+$ webhookx start --help
+
 Start server
 
 Usage:
@@ -72,6 +76,8 @@ Flags:
 #### webhookx version
 
 ```sh
+$ webhookx version --help
+
 Print the version with a short commit hash.
 
 Usage:
