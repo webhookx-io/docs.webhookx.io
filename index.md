@@ -4,12 +4,12 @@ layout: home
 
 hero:
   name: "WebhookX"
-  text: "An modern webhooks gateway"
+  text: "A modern webhooks gateway"
   tagline: WebhookX is an open-source webhooks gateway for message receiving, processing, and delivering.
   actions:
     - theme: alt
       text: Quickstart
-      link: /introduction/overview
+      link: /docs/index
 
 
 #features:

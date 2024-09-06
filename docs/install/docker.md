@@ -9,7 +9,7 @@
 ```yaml
 services:
   webhookx-migration:
-    image: "webhookx-io/webhookx:latest"
+    image: "webhookx/webhookx:latest"
     container_name: webhookx-migration
     environment:
       WEBHOOKX_DATABASE_HOST: webhookx-database
@@ -19,7 +19,7 @@ services:
         condition: service_healthy
 
   webhookx:
-    image: "webhookx-io/webhookx:latest"
+    image: "webhookx/webhookx:latest"
     container_name: webhookx
     environment:
       WEBHOOKX_DATABASE_HOST: webhookx-database
@@ -49,10 +49,18 @@ services:
       interval: 3s
       timeout: 5s
       retries: 3
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data/"
 
   redis:
     image: redis:6
+    command: "--appendonly yes --appendfsync everysec"
+    volumes:
+      - "redis_data:/data"
 
+volumes:
+  postgres_data:
+  redis_data:
 ```
 
 

@@ -13,9 +13,9 @@ export default defineConfig({
 
     nav: [
       {
-        text: 'Docs',
-        link: '/docs',
-        activeMatch: '/'
+        text: 'Documentation',
+        link: '/docs/index',
+        activeMatch: '/docs'
       },
       {
         text: 'Blog',
@@ -25,7 +25,7 @@ export default defineConfig({
     ],
 
     sidebar: {
-      '/': { base: '/', items: sidebarDocs() },
+      '/docs/': { base: '', items: sidebarDocs() },
       '/blog/': { base: '/blog/', items: sidebarBlog() }
     },
 
@@ -42,41 +42,38 @@ export default defineConfig({
 function sidebarDocs(): DefaultTheme.SidebarItem[] {
   return [
     {
-      text: "Introduction",
-      collapsed: false,
+      text: "Home",
       items: [
-        { text: 'Overview', link: 'introduction/overview' },
-        { text: 'CLI', link: 'docs/cli' },
+        { text: 'Overview', link: 'docs/index' },
       ]
     },
     {
       text: "Install WebhookX",
-      collapsed: true,
+      collapsed: false,
       items: [
-        { text: 'Docker', link: 'install/docker' },
-        // { text: 'Kubernetes', link: 'install/kubernetes' },
-        // { text: 'Linux', link: 'install/linux' },
+        { text: 'Docker', link: 'docs/install/docker' },
       ]
     },
     {
       text: "Deployment",
       collapsed: false,
       items: [
-        { text: 'Configuration', link: 'configuration' },
+        { text: 'Configuration', link: 'docs/configuration' },
       ]
     },
     {
       text: "Admin API",
       collapsed: false,
       items: [
-        { text: 'Overview', link: 'admin/overview' },
+        { text: 'Overview', link: 'docs/admin/overview' },
       ]
     },
     {
-      text: "Others",
-      collapsed: false,
+      text: "References",
       items: [
-        { text: 'Release Notes', link: 'https://github.com/webhookx-io/webhookx/releases/' }
+        { text: 'CLI', link: 'docs/cli' },
+        { text: 'OpenAPI', link: 'https://github.com/webhookx-io/webhookx/blob/main/openapi.yml' },
+        { text: 'Release Notes', link: 'https://github.com/webhookx-io/webhookx/releases' },
       ]
     },
   ]
