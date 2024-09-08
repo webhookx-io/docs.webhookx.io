@@ -3,6 +3,7 @@ import { defineConfig, type DefaultTheme } from 'vitepress'
 export default defineConfig({
   title: "WebhookX",
   description: "A modern webhooks gateway.",
+  cleanUrls: true,
   srcExclude: [
     "README.md"
   ],
