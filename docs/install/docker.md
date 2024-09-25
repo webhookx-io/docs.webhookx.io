@@ -9,21 +9,28 @@
 ```yaml
 services:
   webhookx-migration:
-    image: "webhookx/webhookx:latest"
+    image: "webhookx/webhookx:0.2.0"
     container_name: webhookx-migration
     environment:
       WEBHOOKX_DATABASE_HOST: webhookx-database
+      WEBHOOKX_DATABASE_USERNAME: webhookx
+      WEBHOOKX_DATABASE_DATABASE: webhookx
+      WEBHOOKX_DATABASE_PORT: 5432
     command: webhookx migrations up
     depends_on:
       webhookx-database:
         condition: service_healthy
 
   webhookx:
-    image: "webhookx/webhookx:latest"
+    image: "webhookx/webhookx:0.2.0"
     container_name: webhookx
     environment:
       WEBHOOKX_DATABASE_HOST: webhookx-database
+      WEBHOOKX_DATABASE_USERNAME: webhookx
+      WEBHOOKX_DATABASE_DATABASE: webhookx
+      WEBHOOKX_DATABASE_PORT: 5432
       WEBHOOKX_REDIS_HOST: redis
+      WEBHOOKX_REDIS_PORT: 6379
       WEBHOOKX_ADMIN_LISTEN: 0.0.0.0:8080
       WEBHOOKX_WORKER_ENABLED: true
       WEBHOOKX_PROXY_LISTEN: 0.0.0.0:8081
@@ -45,7 +52,7 @@ services:
       POSTGRES_USER: webhookx
       POSTGRES_HOST_AUTH_METHOD: trust
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
       interval: 3s
       timeout: 5s
       retries: 3
