@@ -11,6 +11,9 @@ export default defineConfig({
     editLink: {
       pattern: 'https://github.com/webhookx-io/docs.webhookx.io/edit/main/:path'
     },
+    outline: {
+      level: [2, 3],
+    },
 
     nav: [
       {
@@ -67,6 +70,25 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
       collapsed: false,
       items: [
         { text: 'Overview', link: 'docs/admin/overview' },
+      ]
+    },
+    {
+      text: "Plugins",
+      items: [
+        { text: 'Overview', link: 'docs/plugin/index' },
+        {
+          text: 'Inbound Plugins',
+          items: [
+            { text: 'Function', link: 'docs/plugin/function' }
+          ]
+        },
+        {
+          text: 'Outbound Plugins',
+          items: [
+            { text: 'Signature', link: 'docs/plugin/webhookx-signature' },
+            { text: 'WebAssembly', link: 'docs/plugin/wasm' }
+          ]
+        },
       ]
     },
     {
