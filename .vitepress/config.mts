@@ -52,10 +52,10 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
       ]
     },
     {
-      text: "Install WebhookX",
-      collapsed: false,
+      text: "Install",
+      link: 'docs/install/index',
       items: [
-        { text: 'Docker', link: 'docs/install/docker' },
+        { text: 'WebhookX', link: 'docs/install/index' },
       ]
     },
     {
