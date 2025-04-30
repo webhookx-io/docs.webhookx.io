@@ -182,8 +182,8 @@ For more examples of Wasm Plugin, see [webhookx/examples](https://github.com/web
 
 - [webassembly.org](https://webassembly.org/)
 
-- [WebhookX WebAssembly Plugin](https://github.com/webhookx-io/webhookx/blob/main/pkg/plugin/wasm/README.md)
-- [WebAssembly Plugin ABI specification](https://github.com/webhookx-io/webhookx/tree/main/pkg/plugin/wasm/versions)
+- [WebhookX WebAssembly Plugin](https://github.com/webhookx-io/webhookx/blob/main/plugins/wasm/README.md)
+- [WebAssembly Plugin ABI specification](https://github.com/webhookx-io/webhookx/tree/main/plugins/wasm/versions)
 
 - WebAssembly in production
 
