@@ -1,10 +1,13 @@
 {
+  "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
-    "vitepress": "2.0.0-alpha.5"
+    "@modyfi/vite-plugin-yaml": "^1.1.1",
+    "vitepress": "latest",
+    "vitepress-openapi": "latest"
   }
 }

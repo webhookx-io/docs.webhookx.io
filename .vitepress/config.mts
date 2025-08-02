@@ -1,4 +1,12 @@
-import { defineConfig, type DefaultTheme } from 'vitepress'
+import { defineConfig, type DefaultTheme } from 'vitepress';
+import { useSidebar } from 'vitepress-openapi';
+import spec from '../openapi/openapi.json' with { type: 'json' };
+
+const sidebar = useSidebar({
+  spec,
+  // Optionally, you can specify a link prefix for all generated sidebar items.
+  linkPrefix: '/operations/',
+})
 
 export default defineConfig({
   title: "WebhookX",
@@ -26,11 +34,17 @@ export default defineConfig({
         link: '/blog/index',
         activeMatch: '/blog'
       },
+      {
+        text: 'OpenAPI',
+        link: '/openapi/index',
+        activeMatch: '/openapi'
+      }
     ],
 
     sidebar: {
       '/docs/': { base: '', items: sidebarDocs() },
-      '/blog/': { base: '/blog/', items: sidebarBlog() }
+      '/blog/': { base: '/blog/', items: sidebarBlog() },
+      '/openapi/': { base: '/openapi/', items: openAPI() }
     },
 
 
@@ -39,7 +53,18 @@ export default defineConfig({
       { icon: 'x', link: 'https://x.com/WebhookX' },
       { icon: 'slack', link: 'https://join.slack.com/t/webhookx/shared_invite/zt-2o4b6hv45-mWm6_WUcQP9qEf1nOxhrrg' },
     ]
-  }
+  },
+  /** Give each dynamic page its own <title> */
+  transformPageData(pageData) {
+    // params returned from [*].paths.js|ts are available here
+    const pageTitle = pageData.params?.pageTitle;
+
+    if (pageTitle) {
+      pageData.title = pageTitle;
+      pageData.frontmatter ??= {};
+      pageData.frontmatter.title = pageTitle;
+    }
+  },
 })
 
 
@@ -117,3 +142,43 @@ function sidebarBlog(): DefaultTheme.SidebarItem[] {
   ]
 }
 
+function openAPI(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: "OpenAPI",
+      link: 'index',
+      items: [
+        { text: 'Overview', link: 'index' },
+        {
+          text: 'By Tags',
+          items: [
+            {
+              text: 'Introduction',
+              link: '/introduction',
+            },
+            ...sidebar.itemsByTags(),
+          ],
+        },
+        {
+          text: 'By Operations',
+          items: [
+            ...sidebar.generateSidebarGroups(),
+          ],
+        },
+        {
+          text: 'By Paths',
+          items: [
+            ...sidebar.itemsByPaths(),
+          ],
+        },
+        {
+          text: 'One Page',
+          items: [
+            { text: 'One Page', link: '/one-page' },
+            { text: 'Without Sidebar', link: '/without-sidebar' },
+          ],
+        },
+      ]
+    },
+  ]
+}

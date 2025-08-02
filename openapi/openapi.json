@@ -1,0 +1,1568 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "WebhookX Admin API",
+    "contact": {
+      "name": "WebhookX",
+      "url": "https://github.com/webhookx-io/webhookx"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "0.8.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Get WebhookX information",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "version": "1.0.0"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/workspaces": {
+      "get": {
+        "summary": "Page workspaces",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page_no"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Workspace"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workspace"
+        ]
+      },
+      "post": {
+        "summary": "Create a workspace",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workspace"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workspace"
+        ]
+      }
+    },
+    "/workspaces/{id}": {
+      "get": {
+        "summary": "Retrieve a workspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workspace"
+        ]
+      },
+      "put": {
+        "summary": "Update a workspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Workspace"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Workspace"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Workspace"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a workspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        },
+        "tags": [
+          "Workspace"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/endpoints": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Page endpoints",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page_no"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Endpoint"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Endpoint"
+        ]
+      },
+      "post": {
+        "summary": "Create a endpoint",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Endpoint"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Endpoint"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Endpoint"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/endpoints/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a endpoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Endpoint"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Endpoint"
+        ]
+      },
+      "put": {
+        "summary": "Update a endpoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Endpoint"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Endpoint"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Endpoint"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a endpoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        },
+        "tags": [
+          "Endpoint"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/attempts": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Page webhook attempts",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page_no"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          },
+          {
+            "name": "event_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endpoint_id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Attempt"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attempt"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/attempts/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a webhook attempt",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Attempt"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Attempt"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/events": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Page events",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page_no"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Event"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Event"
+        ]
+      },
+      "post": {
+        "summary": "Create an event",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Event"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Event"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/events/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve an event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Event"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/events/{id}/retry": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "post": {
+        "summary": "Manually retry an event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "endpoint_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Event"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/sources": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Page sources",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page_no"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Source"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Source"
+        ]
+      },
+      "post": {
+        "summary": "Create a source",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Source"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Source"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/source/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a source",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Source"
+        ]
+      },
+      "put": {
+        "summary": "Update a source",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Source"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Source"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a source",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        },
+        "tags": [
+          "Source"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/plugins": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Page plugins",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/page_no"
+          },
+          {
+            "$ref": "#/components/parameters/page_size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Pagination"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Plugin"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Plugin"
+        ]
+      },
+      "post": {
+        "summary": "Create a plugin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plugin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plugin"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Plugin"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/plugins/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/workspace_id"
+        }
+      ],
+      "get": {
+        "summary": "Retrieve a plugin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plugin"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Plugin"
+        ]
+      },
+      "put": {
+        "summary": "Update a plugin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plugin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Plugin"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Plugin"
+        ]
+      },
+      "delete": {
+        "summary": "Delete a plugin",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        },
+        "tags": [
+          "Plugin"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/config/sync": {
+      "post": {
+        "summary": "Sync declarative configuration",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/workspace_id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Configuration"
+              }
+            },
+            "application/x-yaml": {
+              "schema": {
+                "$ref": "#/components/schemas/Configuration"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Declarative"
+        ]
+      }
+    },
+    "/workspaces/{ws_id}/config/dump": {
+      "post": {
+        "summary": "Dump declarative configuration",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/workspace_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Declarative"
+        ]
+      }
+    },
+    "/debug/pprof/": {
+      "get": {
+        "summary": "Responds the pprof html page listing the available profiles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Debug"
+        ]
+      }
+    },
+    "/debug/pprof/{profile}": {
+      "get": {
+        "summary": "Responds a specific pprof profile",
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "allocs",
+                "block",
+                "goroutine",
+                "heap",
+                "mutex",
+                "threadcreate",
+                "cmdline",
+                "symbol",
+                "profile",
+                "trace"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "tags": [
+          "Debug"
+        ]
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "page_no": {
+        "in": "query",
+        "name": "page_no",
+        "schema": {
+          "type": "integer",
+          "default": 1
+        }
+      },
+      "page_size": {
+        "in": "query",
+        "name": "page_size",
+        "schema": {
+          "type": "integer",
+          "default": 20
+        }
+      },
+      "workspace_id": {
+        "in": "path",
+        "name": "ws_id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "default"
+        },
+        "description": "The workspace id"
+      }
+    },
+    "schemas": {
+      "Pagination": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "Metadata": {
+        "type": "object",
+        "default": {},
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "Workspace": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          "created_at": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "integer",
+            "readOnly": true
+          }
+        }
+      },
+      "Endpoint": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "request": {
+            "type": "object",
+            "default": {
+              "method": "POST",
+              "headers": null,
+              "timeout": 10000
+            },
+            "properties": {
+              "url": {
+                "type": "string",
+                "example": "https://example.com",
+                "minLength": 1
+              },
+              "method": {
+                "type": "string",
+                "default": "POST",
+                "enum": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "DELETE",
+                  "PATCH"
+                ]
+              },
+              "headers": {
+                "type": "object",
+                "default": null,
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              "timeout": {
+                "type": "integer",
+                "default": 10000,
+                "maximum": 60000,
+                "minimum": 0
+              }
+            },
+            "required": [
+              "url"
+            ]
+          },
+          "retry": {
+            "type": "object",
+            "default": {
+              "strategy": "fixed",
+              "config": {
+                "attempts": [
+                  0,
+                  60,
+                  3600
+                ]
+              }
+            },
+            "properties": {
+              "strategy": {
+                "type": "string",
+                "default": "fixed",
+                "enum": [
+                  "fixed"
+                ]
+              },
+              "config": {
+                "type": "object",
+                "default": {
+                  "attempts": [
+                    0,
+                    60,
+                    3600
+                  ]
+                },
+                "properties": {
+                  "attempts": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "default": [
+                      0,
+                      60,
+                      3600
+                    ],
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "foo.bar"
+            },
+            "default": []
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          "created_at": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "integer",
+            "readOnly": true
+          }
+        }
+      },
+      "Attempt": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "endpoint_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "INIT",
+              "QUEUED",
+              "SUCCESSFUL",
+              "FAILED",
+              "CANCELED"
+            ]
+          },
+          "attempt_number": {
+            "type": "integer"
+          },
+          "scheduled_at": {
+            "type": "integer"
+          },
+          "attempted_at": {
+            "type": "integer",
+            "nullable": true
+          },
+          "trigger_mode": {
+            "type": "string",
+            "enum": [
+              "INITIAL",
+              "MANUAL",
+              "AUTOMATIC"
+            ]
+          },
+          "exhausted": {
+            "type": "boolean"
+          },
+          "error_code": {
+            "type": "string",
+            "enum": [
+              "TIMEOUT",
+              "UNKNOWN",
+              "ENDPOINT_DISABLED",
+              "ENDPOINT_NOT_FOUND"
+            ],
+            "nullable": true
+          },
+          "request": {
+            "type": "object",
+            "nullable": true,
+            "properties": {
+              "method": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "headers": {
+                "type": "object",
+                "nullable": true
+              },
+              "body": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "response": {
+            "type": "object",
+            "nullable": true,
+            "properties": {
+              "status": {
+                "type": "number"
+              },
+              "latency": {
+                "description": "Latancy of response in milliseconds",
+                "type": "integer"
+              },
+              "headers": {
+                "type": "object",
+                "nullable": true
+              },
+              "body": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "created_at": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "integer",
+            "readOnly": true
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "ingested_at": {
+            "description": "The time the event was ingested",
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "integer",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "event_type",
+          "data"
+        ]
+      },
+      "Source": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "path": {
+            "type": "string"
+          },
+          "methods": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "PATCH"
+              ]
+            },
+            "minItems": 1
+          },
+          "async": {
+            "description": "Whether to ingest events asynchronously through the queue",
+            "type": "boolean",
+            "default": false
+          },
+          "response": {
+            "type": "object",
+            "nullable": true,
+            "properties": {
+              "code": {
+                "type": "integer",
+                "maximum": 599,
+                "minimum": 200
+              },
+              "content_type": {
+                "type": "string"
+              },
+              "body": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "content_type"
+            ]
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          "created_at": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "integer",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "path",
+          "methods"
+        ]
+      },
+      "Plugin": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "endpoint_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "source_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "config": {
+            "type": "object",
+            "nullable": true
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          },
+          "created_at": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "updated_at": {
+            "type": "integer",
+            "readOnly": true
+          }
+        }
+      },
+      "Configuration": {
+        "type": "object",
+        "properties": {
+          "endpoints": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/Endpoint"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "plugins": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Plugin"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/Source"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "plugins": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Plugin"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "The resource was not found"
+      },
+      "NotContent": {
+        "description": "The resource has been successfully deleted or the resource didn't exist"
+      }
+    }
+  }
+}
