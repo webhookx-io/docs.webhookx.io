@@ -1,6 +1,6 @@
 import { defineConfig, type DefaultTheme } from 'vitepress';
 import { useSidebar } from 'vitepress-openapi';
-import spec from '../openapi/openapi.json' with { type: 'json' };
+import spec from '../docs/openapi/openapi.json' with { type: 'json' };
 
 const sidebar = useSidebar({
   spec,
@@ -34,17 +34,11 @@ export default defineConfig({
         link: '/blog/index',
         activeMatch: '/blog'
       },
-      {
-        text: 'OpenAPI',
-        link: '/openapi/index',
-        activeMatch: '/openapi'
-      }
     ],
 
     sidebar: {
       '/docs/': { base: '', items: sidebarDocs() },
       '/blog/': { base: '/blog/', items: sidebarBlog() },
-      '/openapi/': { base: '/openapi/', items: openAPI() }
     },
 
 
@@ -91,11 +85,24 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
       ]
     },
     {
-      text: "Admin API",
+      text: 'OpenAPI',
       collapsed: false,
       items: [
-        { text: 'Overview', link: 'docs/admin/overview' },
-      ]
+        {
+          text: 'Overview',
+          link: '/docs/openapi/overview',
+        },
+        ...sidebar.generateSidebarGroups({
+          linkPrefix: '/docs/openapi/operations/',
+        }).map((group) => ({
+          ...group,
+          collapsed: true
+        })),
+        {
+          text: 'One Page',
+          link: '/docs/openapi/one-page',
+        },
+      ],
     },
     {
       text: "Plugins",
@@ -120,7 +127,6 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
       text: "References",
       items: [
         { text: 'CLI', link: 'docs/cli' },
-        { text: 'OpenAPI', link: 'https://github.com/webhookx-io/webhookx/blob/main/openapi.yml' },
         { text: 'Release Notes', link: 'https://github.com/webhookx-io/webhookx/releases' },
       ]
     },
@@ -137,47 +143,6 @@ function sidebarBlog(): DefaultTheme.SidebarItem[] {
         { text: 'Releases', link: 'releases/index' },
         { text: 'News', link: 'news/index' },
         { text: 'Engineering', link: 'engineering/index' },
-      ]
-    },
-  ]
-}
-
-function openAPI(): DefaultTheme.SidebarItem[] {
-  return [
-    {
-      text: "OpenAPI",
-      link: 'index',
-      items: [
-        { text: 'Overview', link: 'index' },
-        {
-          text: 'By Tags',
-          items: [
-            {
-              text: 'Introduction',
-              link: '/introduction',
-            },
-            ...sidebar.itemsByTags(),
-          ],
-        },
-        {
-          text: 'By Operations',
-          items: [
-            ...sidebar.generateSidebarGroups(),
-          ],
-        },
-        {
-          text: 'By Paths',
-          items: [
-            ...sidebar.itemsByPaths(),
-          ],
-        },
-        {
-          text: 'One Page',
-          items: [
-            { text: 'One Page', link: '/one-page' },
-            { text: 'Without Sidebar', link: '/without-sidebar' },
-          ],
-        },
       ]
     },
   ]
