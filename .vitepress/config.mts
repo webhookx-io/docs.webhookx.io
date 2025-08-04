@@ -95,7 +95,7 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
       text: "References",
       items: [
         { text: 'CLI', link: 'docs/cli' },
-        { text: 'OpenAPI', link: 'https://github.com/webhookx-io/webhookx/blob/main/openapi.yml' },
+        { text: 'API Reference', link: 'https://webhookx.mintlify.app/api-reference/' },
         { text: 'Release Notes', link: 'https://github.com/webhookx-io/webhookx/releases' },
       ]
     },
