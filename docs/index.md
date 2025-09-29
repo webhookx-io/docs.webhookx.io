@@ -43,3 +43,7 @@ WebhookX can be scaled horizontally by running multiple instances or adopting th
 - [Introducing WebAssembly Plugin](https://docs.webhookx.io/blog/engineering/introducing-webassembly-plugin)
 - [Function: A Way of Handling Webhook Verification Chaos](https://docs.webhookx.io/blog/engineering/function-a-way-of-handling-webhook-verification-chaos)
 
+
+## License
+
+WebhookX is under the Apache 2.0 license.
