@@ -2,7 +2,7 @@ import { defineConfig, type DefaultTheme } from 'vitepress'
 
 export default defineConfig({
   title: "WebhookX",
-  description: "A modern webhooks gateway.",
+  description: "The Next-Generation Webhooks Gateway.",
   cleanUrls: true,
   srcExclude: [
     "README.md"
@@ -14,7 +14,6 @@ export default defineConfig({
     outline: {
       level: [2, 3],
     },
-
     nav: [
       {
         text: 'Documentation',
@@ -49,27 +48,28 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
       text: "Home",
       items: [
         { text: 'Overview', link: 'docs/index' },
+        { text: 'Architecture', link: 'docs/architecture' },
       ]
     },
     {
-      text: "Install",
-      link: 'docs/install/index',
+      text: "Quickstart",
       items: [
-        { text: 'WebhookX', link: 'docs/install/index' },
+        { text: 'Docker', link: 'docs/quickstart/docker' },
+        { text: 'Kubernetes', link: 'docs/quickstart/kubernetes' },
+        { text: 'Others', link: 'docs/quickstart/others' },
       ]
     },
-    {
-      text: "Deployment",
-      collapsed: false,
-      items: [
-        { text: 'Configuration', link: 'docs/configuration' },
-      ]
-    },
+    // {
+    //   text: "Deployment",
+    //   items: [
+    //
+    //   ]
+    // },
     {
       text: "Admin API",
-      collapsed: false,
+      link: 'docs/admin/overview',
       items: [
-        { text: 'Overview', link: 'docs/admin/overview' },
+        { text: 'Entities', link: 'docs/admin/entities' },
       ]
     },
     {
@@ -92,10 +92,21 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
       ]
     },
     {
+      text: "Best Practice",
+      link: 'docs/best-practice/best-practice',
+    },
+    {
+      text: "Performance",
+      items: [
+        { text: 'Benchmarks', link: 'docs/benchmarks' },
+      ]
+    },
+    {
       text: "References",
       items: [
+        { text: 'Configuration', link: 'docs/configuration' },
         { text: 'CLI', link: 'docs/cli' },
-        { text: 'API Reference', link: 'https://webhookx.mintlify.app/api-reference/' },
+        { text: 'API Reference', link: 'https://openapi.webhookx.io/' },
         { text: 'Release Notes', link: 'https://github.com/webhookx-io/webhookx/releases' },
       ]
     },

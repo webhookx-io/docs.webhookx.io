@@ -10,6 +10,7 @@ Usage:
   webhookx [command]
 
 Available Commands:
+  admin       Admin commands
   completion  Generate the autocompletion script for the specified shell
   help        Help about any command
   migrations  
@@ -17,7 +18,8 @@ Available Commands:
   version     Print the version
 
 Flags:
-  -h, --help   help for webhookx
+  -h, --help      help for webhookx
+      --verbose   Verbose logging.
 
 Use "webhookx [command] --help" for more information about a command.
 ```
@@ -28,11 +30,32 @@ Use "webhookx [command] --help" for more information about a command.
 
 All commands take a set of special, optional flags as arguments:
 
--   `-h`, `--help`: print the command’s help message
+- `-h`, `--help`: print the command’s help message
+- `--verbose`: enable verbose logging.
 
 ## Commands
 
+### webhookx admin
 
+```sh
+webhookx admin --help
+Admin commands
+
+Usage:
+  webhookx admin [command]
+
+Available Commands:
+  dump        Dump entities to declarative configuration
+  sync        Synchronize a declarative configuration to WebhookX.
+
+Flags:
+  -h, --help   help for admin
+
+Global Flags:
+      --verbose   Verbose logging.
+
+Use "webhookx admin [command] --help" for more information about a command.
+```
 
 ### webhookx migrations
 
@@ -73,7 +96,7 @@ Flags:
 
 
 
-#### webhookx version
+### webhookx version
 
 ```sh
 $ webhookx version --help
