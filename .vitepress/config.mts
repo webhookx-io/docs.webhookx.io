@@ -79,7 +79,8 @@ function sidebarDocs(): DefaultTheme.SidebarItem[] {
         {
           text: 'Inbound Plugins',
           items: [
-            { text: 'Function', link: 'docs/plugin/function' }
+            { text: 'Function', link: 'docs/plugin/function' },
+            { text: 'JSONSchema-Validator', link: 'docs/plugin/jsonschema-validator' },
           ]
         },
         {
